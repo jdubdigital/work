@@ -863,22 +863,56 @@ class VehicleCounterApp {
         
         try {
             const file = fileInput.files[0];
+            console.log(`Loading video file: ${file.name} (${(file.size / 1024 / 1024).toFixed(2)} MB)`);
+            
             const url = URL.createObjectURL(file);
             
             this.videoElement.src = url;
-            this.videoElement.loop = true; // Loop video for continuous testing
+            this.videoElement.loop = true;
             this.videoElement.muted = true;
+            this.videoElement.playsInline = true;
             
-            // Wait for video to be ready
+            // Wait for video to load and play
             await new Promise((resolve, reject) => {
+                let resolved = false;
+                
                 this.videoElement.onloadedmetadata = () => {
-                    this.videoElement.play();
-                    resolve();
+                    console.log(`Video metadata loaded: ${this.videoElement.videoWidth}x${this.videoElement.videoHeight}`);
                 };
-                this.videoElement.onerror = () => {
-                    reject(new Error('Failed to load video file'));
+                
+                this.videoElement.onloadeddata = async () => {
+                    console.log('Video data loaded, attempting to play...');
+                    try {
+                        await this.videoElement.play();
+                        console.log('Video playing successfully');
+                        if (!resolved) {
+                            resolved = true;
+                            resolve();
+                        }
+                    } catch (playError) {
+                        console.error('Play failed:', playError);
+                        reject(new Error(`Failed to play video: ${playError.message}`));
+                    }
                 };
+                
+                this.videoElement.onerror = (e) => {
+                    console.error('Video error:', e);
+                    reject(new Error('Failed to load video file. Check format and codec.'));
+                };
+                
+                // Timeout after 10 seconds
+                setTimeout(() => {
+                    if (!resolved) {
+                        reject(new Error('Video loading timeout'));
+                    }
+                }, 10000);
             });
+            
+            // Verify video is actually playing
+            if (this.videoElement.paused) {
+                console.warn('Video is paused, attempting to play again...');
+                await this.videoElement.play();
+            }
             
             // Setup canvases
             this.setupCanvases();
@@ -892,11 +926,13 @@ class VehicleCounterApp {
             this.isRunning = true;
             this.startDetectionLoop();
             
-            console.log(`Video file loaded: ${file.name} (${this.videoElement.videoWidth}x${this.videoElement.videoHeight})`);
+            console.log(`✓ Video successfully started: ${file.name}`);
+            console.log(`  Resolution: ${this.videoElement.videoWidth}x${this.videoElement.videoHeight}`);
+            console.log(`  Duration: ${this.videoElement.duration.toFixed(1)}s`);
             
         } catch (error) {
             console.error('Error loading video file:', error);
-            alert('Failed to load video file. Please try a different file format (MP4, WebM).');
+            alert(`Failed to load video file: ${error.message}\n\nTry:\n- Using MP4 format (H.264 codec)\n- A different video file\n- Checking browser console (F12) for details`);
         }
     }
     
@@ -1177,6 +1213,16 @@ class VehicleCounterApp {
         
         const scaleX = this.overlayCanvas.width / this.videoElement.videoWidth;
         const scaleY = this.overlayCanvas.height / this.videoElement.videoHeight;
+        
+        // Draw video frame to canvas (so it's visible)
+        if (this.videoElement.readyState >= 2) { // HAVE_CURRENT_DATA or better
+            this.overlayCtx.drawImage(
+                this.videoElement,
+                0, 0,
+                this.overlayCanvas.width,
+                this.overlayCanvas.height
+            );
+        }
         
         // Draw heatmap/trails
         if (this.showHeatmap) {
