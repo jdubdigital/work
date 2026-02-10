@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browser Vehicle Counter - Real-time Detection & Tracking</title>
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- TensorFlow.js and COCO-SSD model -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@4.11.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/coco-ssd@2.2.3"></script>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <h1>🚗 Browser Vehicle Counter</h1>
+            <p class="subtitle">Real-time detection & tracking • 100% local processing</p>
+        </header>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Left Sidebar - Controls -->
+            <aside class="controls-panel">
+                <section class="control-group">
+                    <h3>📹 Camera</h3>
+                    <select id="cameraSelect" class="control-input">
+                        <option value="">Select Camera...</option>
+                    </select>
+                    <div class="button-group">
+                        <button id="startBtn" class="btn btn-primary">Start Camera</button>
+                        <button id="stopBtn" class="btn btn-secondary" disabled>Stop Camera</button>
+                    </div>
+                </section>
+
+                <section class="control-group">
+                    <h3>🎯 Detection</h3>
+                    <div class="control-item">
+                        <label>
+                            Confidence Threshold: <span id="confidenceValue">0.50</span>
+                        </label>
+                        <input type="range" id="confidenceSlider" min="0" max="1" step="0.05" value="0.5" class="slider">
+                    </div>
+                    <div class="control-item">
+                        <label>
+                            IOU Threshold: <span id="iouValue">0.30</span>
+                        </label>
+                        <input type="range" id="iouSlider" min="0" max="1" step="0.05" value="0.3" class="slider">
+                    </div>
+                    <div class="button-group">
+                        <button id="pauseBtn" class="btn btn-secondary" disabled>Pause Inference</button>
+                        <button id="resumeBtn" class="btn btn-secondary" disabled style="display:none;">Resume</button>
+                    </div>
+                </section>
+
+                <section class="control-group">
+                    <h3>🚙 Vehicle Classes</h3>
+                    <div class="checkbox-list">
+                        <label class="checkbox-item">
+                            <input type="checkbox" class="class-toggle" data-class="car" checked>
+                            <span>Car</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" class="class-toggle" data-class="truck" checked>
+                            <span>Truck</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" class="class-toggle" data-class="bus" checked>
+                            <span>Bus</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" class="class-toggle" data-class="motorcycle" checked>
+                            <span>Motorcycle</span>
+                        </label>
+                        <label class="checkbox-item">
+                            <input type="checkbox" class="class-toggle" data-class="bicycle" checked>
+                            <span>Bicycle</span>
+                        </label>
+                    </div>
+                </section>
+
+                <section class="control-group">
+                    <h3>📏 Counting Lines</h3>
+                    <div id="linesContainer">
+                        <!-- Lines will be added dynamically -->
+                    </div>
+                    <button id="addLineBtn" class="btn btn-secondary">+ Add Line</button>
+                    <div class="control-item" style="margin-top: 10px;">
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="editModeToggle">
+                            <span>Edit Mode (drag endpoints)</span>
+                        </label>
+                    </div>
+                </section>
+
+                <section class="control-group">
+                    <h3>🎨 Visualization</h3>
+                    <div class="control-item">
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="showHeatmap" checked>
+                            <span>Show Heatmap/Trails</span>
+                        </label>
+                    </div>
+                    <div class="control-item">
+                        <label>
+                            Trail Opacity: <span id="heatmapOpacityValue">0.70</span>
+                        </label>
+                        <input type="range" id="heatmapOpacitySlider" min="0" max="1" step="0.1" value="0.7" class="slider">
+                    </div>
+                    <div class="control-item">
+                        <label>
+                            Trail Decay: <span id="heatmapDecayValue">0.98</span>
+                        </label>
+                        <input type="range" id="heatmapDecaySlider" min="0.9" max="1" step="0.01" value="0.98" class="slider">
+                    </div>
+                </section>
+
+                <section class="control-group">
+                    <h3>⚡ Speed Estimation</h3>
+                    <div class="control-item">
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="speedEstimationToggle">
+                            <span>Enable Speed Estimation</span>
+                        </label>
+                    </div>
+                    <div id="calibrationPanel" style="display: none;">
+                        <div class="control-item">
+                            <label>
+                                Distance between lines (meters):
+                            </label>
+                            <input type="number" id="calibrationDistance" value="5" min="1" max="100" step="0.5" class="control-input">
+                        </div>
+                        <button id="calibrateBtn" class="btn btn-secondary">Apply Calibration</button>
+                    </div>
+                </section>
+
+                <section class="control-group">
+                    <h3>🔄 Actions</h3>
+                    <button id="resetCountsBtn" class="btn btn-warning">Reset Counts</button>
+                    <button id="clearHeatmapBtn" class="btn btn-secondary">Clear Heatmap</button>
+                </section>
+            </aside>
+
+            <!-- Center - Video Display -->
+            <main class="video-container">
+                <div class="canvas-wrapper">
+                    <video id="videoElement" autoplay playsinline muted></video>
+                    <canvas id="heatmapCanvas"></canvas>
+                    <canvas id="overlayCanvas"></canvas>
+                    <div id="loadingOverlay" class="loading-overlay">
+                        <div class="spinner"></div>
+                        <p>Loading detection model...</p>
+                    </div>
+                </div>
+
+                <!-- HUD Overlay -->
+                <div id="hudOverlay" class="hud-overlay">
+                    <div class="hud-item">
+                        <span class="hud-label">FPS:</span>
+                        <span class="hud-value" id="fpsDisplay">0</span>
+                    </div>
+                    <div class="hud-item">
+                        <span class="hud-label">Inference:</span>
+                        <span class="hud-value" id="inferenceTimeDisplay">0ms</span>
+                    </div>
+                    <div class="hud-item">
+                        <span class="hud-label">Tracked:</span>
+                        <span class="hud-value" id="trackedCountDisplay">0</span>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Right Sidebar - Statistics -->
+            <aside class="stats-panel">
+                <section class="stat-group">
+                    <h3>📊 Total Counts</h3>
+                    <div class="stat-row">
+                        <span class="stat-label">IN:</span>
+                        <span class="stat-value" id="totalInCount">0</span>
+                    </div>
+                    <div class="stat-row">
+                        <span class="stat-label">OUT:</span>
+                        <span class="stat-value" id="totalOutCount">0</span>
+                    </div>
+                </section>
+
+                <section class="stat-group">
+                    <h3>🚗 By Class</h3>
+                    <div id="classStatsContainer">
+                        <div class="class-stat" data-class="car">
+                            <div class="class-name">Car</div>
+                            <div class="class-counts">
+                                <span class="count-in">IN: <strong>0</strong></span>
+                                <span class="count-out">OUT: <strong>0</strong></span>
+                            </div>
+                        </div>
+                        <div class="class-stat" data-class="truck">
+                            <div class="class-name">Truck</div>
+                            <div class="class-counts">
+                                <span class="count-in">IN: <strong>0</strong></span>
+                                <span class="count-out">OUT: <strong>0</strong></span>
+                            </div>
+                        </div>
+                        <div class="class-stat" data-class="bus">
+                            <div class="class-name">Bus</div>
+                            <div class="class-counts">
+                                <span class="count-in">IN: <strong>0</strong></span>
+                                <span class="count-out">OUT: <strong>0</strong></span>
+                            </div>
+                        </div>
+                        <div class="class-stat" data-class="motorcycle">
+                            <div class="class-name">Motorcycle</div>
+                            <div class="class-counts">
+                                <span class="count-in">IN: <strong>0</strong></span>
+                                <span class="count-out">OUT: <strong>0</strong></span>
+                            </div>
+                        </div>
+                        <div class="class-stat" data-class="bicycle">
+                            <div class="class-name">Bicycle</div>
+                            <div class="class-counts">
+                                <span class="count-in">IN: <strong>0</strong></span>
+                                <span class="count-out">OUT: <strong>0</strong></span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="stat-group">
+                    <h3>📍 By Lane</h3>
+                    <div id="laneStatsContainer">
+                        <!-- Lane stats will be added dynamically -->
+                    </div>
+                </section>
+
+                <section class="stat-group" id="speedStatsSection" style="display: none;">
+                    <h3>🚀 Average Speed</h3>
+                    <div id="speedStatsContainer">
+                        <!-- Speed stats will be added dynamically -->
+                    </div>
+                </section>
+
+                <section class="stat-group">
+                    <h3>ℹ️ Info</h3>
+                    <div class="info-text">
+                        <p><strong>Privacy:</strong> All processing is local. No data is sent to servers.</p>
+                        <p><strong>Model:</strong> COCO-SSD (TensorFlow.js)</p>
+                        <p><strong>Tip:</strong> Enable edit mode to drag counting line endpoints.</p>
+                    </div>
+                </section>
+            </aside>
+        </div>
+    </div>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
