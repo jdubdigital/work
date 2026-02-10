@@ -87,12 +87,23 @@ Then open: `http://localhost:8000`
 
 ### First Use
 
+**Option A: Use a Video File (Easiest for Testing)**
+1. **Get a Test Video**: Download from [Pexels](https://www.pexels.com/search/videos/traffic/) or see `LIVE_FEEDS.md`
+2. **Select "Video File"**: Choose the video file radio button
+3. **Upload Video**: Click "Choose File" and select your traffic video
+4. **Click "Start"**: The video will play and loop automatically
+5. **Position Lines**: Enable "Edit Mode" to drag counting line endpoints
+6. **Watch it Count**: Vehicles are detected and counted automatically
+
+**Option B: Use Your Webcam**
 1. **Grant Camera Permissions**: When prompted, allow camera access
 2. **Select Camera**: Choose your camera from the dropdown
-3. **Click "Start Camera"**: The model will load (takes 2-5 seconds)
-4. **Wait for Detection**: Green bounding boxes will appear around detected vehicles
+3. **Click "Start"**: The model will load (takes 2-5 seconds)
+4. **Point at Vehicles**: Aim camera at toy cars, photos, or screen with traffic video
 5. **Adjust Lines**: Enable "Edit Mode" to drag counting line endpoints
 6. **Monitor Counts**: Watch the statistics panel update as vehicles cross lines
+
+> 💡 **Tip**: Video file mode is best for testing all features without needing a camera or traffic scene!
 
 ## 📋 User Guide
 

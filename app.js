@@ -711,9 +711,25 @@ class VehicleCounterApp {
     }
     
     initializeUI() {
+        // Source type selection
+        document.querySelectorAll('input[name="sourceType"]').forEach(radio => {
+            radio.addEventListener('change', (e) => {
+                const cameraControls = document.getElementById('cameraControls');
+                const fileControls = document.getElementById('fileControls');
+                
+                if (e.target.value === 'camera') {
+                    cameraControls.style.display = 'block';
+                    fileControls.style.display = 'none';
+                } else {
+                    cameraControls.style.display = 'none';
+                    fileControls.style.display = 'block';
+                }
+            });
+        });
+        
         // Camera controls
         this.populateCameraDevices();
-        document.getElementById('startBtn').addEventListener('click', () => this.startCamera());
+        document.getElementById('startBtn').addEventListener('click', () => this.startVideoSource());
         document.getElementById('stopBtn').addEventListener('click', () => this.stopCamera());
         
         // Detection controls
@@ -827,6 +843,63 @@ class VehicleCounterApp {
         }
     }
     
+    async startVideoSource() {
+        const sourceType = document.querySelector('input[name="sourceType"]:checked').value;
+        
+        if (sourceType === 'camera') {
+            await this.startCamera();
+        } else {
+            await this.startVideoFile();
+        }
+    }
+    
+    async startVideoFile() {
+        const fileInput = document.getElementById('videoFileInput');
+        
+        if (!fileInput.files || fileInput.files.length === 0) {
+            alert('Please select a video file');
+            return;
+        }
+        
+        try {
+            const file = fileInput.files[0];
+            const url = URL.createObjectURL(file);
+            
+            this.videoElement.src = url;
+            this.videoElement.loop = true; // Loop video for continuous testing
+            this.videoElement.muted = true;
+            
+            // Wait for video to be ready
+            await new Promise((resolve, reject) => {
+                this.videoElement.onloadedmetadata = () => {
+                    this.videoElement.play();
+                    resolve();
+                };
+                this.videoElement.onerror = () => {
+                    reject(new Error('Failed to load video file'));
+                };
+            });
+            
+            // Setup canvases
+            this.setupCanvases();
+            
+            // Update UI
+            document.getElementById('startBtn').disabled = true;
+            document.getElementById('stopBtn').disabled = false;
+            document.getElementById('pauseBtn').disabled = false;
+            
+            // Start detection loop
+            this.isRunning = true;
+            this.startDetectionLoop();
+            
+            console.log(`Video file loaded: ${file.name} (${this.videoElement.videoWidth}x${this.videoElement.videoHeight})`);
+            
+        } catch (error) {
+            console.error('Error loading video file:', error);
+            alert('Failed to load video file. Please try a different file format (MP4, WebM).');
+        }
+    }
+    
     async startCamera() {
         const deviceId = document.getElementById('cameraSelect').value;
         
@@ -875,9 +948,17 @@ class VehicleCounterApp {
     stopCamera() {
         this.isRunning = false;
         
+        // Stop camera stream if active
         if (this.cameraStream) {
             this.cameraStream.getTracks().forEach(track => track.stop());
             this.cameraStream = null;
+        }
+        
+        // Stop video file if active
+        if (this.videoElement.src) {
+            this.videoElement.pause();
+            this.videoElement.src = '';
+            this.videoElement.srcObject = null;
         }
         
         if (this.animationFrameId) {

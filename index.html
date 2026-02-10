@@ -23,13 +23,32 @@
             <!-- Left Sidebar - Controls -->
             <aside class="controls-panel">
                 <section class="control-group">
-                    <h3>📹 Camera</h3>
-                    <select id="cameraSelect" class="control-input">
-                        <option value="">Select Camera...</option>
-                    </select>
+                    <h3>📹 Video Source</h3>
+                    <div class="control-item">
+                        <label>
+                            <input type="radio" name="sourceType" value="camera" checked> Webcam
+                        </label>
+                        <label style="margin-left: 15px;">
+                            <input type="radio" name="sourceType" value="file"> Video File
+                        </label>
+                    </div>
+                    <div id="cameraControls">
+                        <select id="cameraSelect" class="control-input">
+                            <option value="">Select Camera...</option>
+                        </select>
+                    </div>
+                    <div id="fileControls" style="display: none;">
+                        <input type="file" id="videoFileInput" accept="video/*" class="control-input" style="padding: 5px;">
+                        <p style="font-size: 11px; color: var(--text-secondary); margin-top: 5px;">
+                            Supports: MP4, WebM, MOV<br>
+                            <a href="LIVE_FEEDS.md" target="_blank" style="color: var(--accent-primary);">
+                                Need test videos? See guide →
+                            </a>
+                        </p>
+                    </div>
                     <div class="button-group">
-                        <button id="startBtn" class="btn btn-primary">Start Camera</button>
-                        <button id="stopBtn" class="btn btn-secondary" disabled>Stop Camera</button>
+                        <button id="startBtn" class="btn btn-primary">Start</button>
+                        <button id="stopBtn" class="btn btn-secondary" disabled>Stop</button>
                     </div>
                 </section>
 
