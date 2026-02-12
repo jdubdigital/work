@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Ad Archive</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+    }
+
+    .break-inside-avoid {
+      break-inside: avoid;
+      -webkit-column-break-inside: avoid;
+      page-break-inside: avoid;
+    }
+
+    .glass {
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      background: rgba(255, 255, 255, 0.7);
+    }
+  </style>
+</head>
+
+<body class="bg-gradient-to-b from-neutral-50 to-neutral-100 text-neutral-900">
+
+  <!-- Header -->
+  <header class="px-8 py-6 border-b border-neutral-200 sticky top-0 z-30 bg-white">
+    <div class="max-w-7xl mx-auto flex items-center justify-between">
+      <h1 class="text-3xl font-extrabold tracking-tight bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-transparent">
+        Ad<span class="text-neutral-700">Archive</span>
+      </h1>
+
+      <div class="hidden md:flex flex-1 justify-center px-8">
+        <div class="relative w-full max-w-xl">
+          <input id="searchInput" type="text" placeholder="Search ads, brands, categories..."
+            class="w-full px-12 py-3 bg-white/70 rounded-lg border focus:outline-none focus:ring-2 focus:ring-violet-500" />
+          <svg xmlns="http://www.w3.org/2000/svg"
+            class="h-5 w-5 absolute left-4 top-1/2 -translate-y-1/2 text-neutral-500" viewBox="0 0 20 20"
+            fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M12.9 14.32a8 8 0 111.414-1.414l4.387 4.386a1 1 0 01-1.414 1.415l-4.387-4.387zM14 8a6 6 0 11-12 0 6 6 0 0112 0z"
+              clip-rule="evenodd" />
+          </svg>
+        </div>
+      </div>
+
+      <nav class="flex items-center space-x-6">
+        <div class="hidden md:flex space-x-6 text-sm font-medium">
+          <a href="#" class="hover:text-violet-600 transition">Home</a>
+          <a href="#" class="hover:text-violet-600 transition">Submit</a>
+          <a href="#" class="hover:text-violet-600 transition">About</a>
+        </div>
+        <button id="mobileSearchBtn" class="md:hidden text-neutral-600 hover:text-violet-600 rounded-md p-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M12.9 14.32a8 8 0 111.414-1.414l4.387 4.386a1 1 0 01-1.414 1.415l-4.387-4.387zM14 8a6 6 0 11-12 0 6 6 0 0112 0z"
+              clip-rule="evenodd" />
+          </svg>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero CTA -->
+<section class="relative bg-gradient-to-r from-pink-100 via-white to-violet-100 border-b border-neutral-200">
+  <div class="max-w-7xl mx-auto flex flex-col items-center justify-center text-center py-24 px-6">
+    <h2 class="text-4xl md:text-5xl font-extrabold tracking-tight text-neutral-900">
+      Discover the Web's Best Ads
+    </h2>
+    <p class="mt-4 text-lg text-neutral-600 max-w-2xl">
+      Browse thousands of banner ads, creative campaigns, and HTML5 experiences for inspiration.
+    </p>
+    <div class="mt-8 flex space-x-4">
+      <a href="#gallery"
+        class="px-6 py-3 bg-violet-600 text-white rounded-lg font-semibold hover:bg-violet-700 transition">
+        Explore Ads
+      </a>
+      <a href="#"
+        class="px-6 py-3 bg-white border border-neutral-300 rounded-lg font-semibold text-neutral-700 hover:bg-neutral-100 transition">
+        Submit Your Ad
+      </a>
+    </div>
+  </div>
+</section>
+
+
+  <!-- Overlay -->
+  <div id="overlay" class="hidden fixed inset-0 bg-black/50 z-20"></div>
+
+  <!-- Filters Panel -->
+  <div id="filtersPanel" class="hidden fixed top-[88px] left-0 right-0 z-40">
+    <div class="max-w-7xl mx-auto bg-white/80 glass p-6 shadow-xl rounded-xl">
+      <div class="grid grid-cols-4 gap-8 text-sm">
+        <div class="space-y-4 font-medium">
+          <button
+            class="flex items-center space-x-2 text-violet-600 font-semibold rounded-md px-2 py-1 hover:bg-violet-100">
+            <span>🔥</span><span>Trending</span>
+          </button>
+          <button
+            class="flex items-center space-x-2 text-neutral-700 hover:text-violet-600 rounded-md px-2 py-1 hover:bg-violet-100">
+            <span>📂</span><span>By Category</span>
+          </button>
+        </div>
+        <div class="col-span-3 grid grid-cols-3 gap-4">
+          <button
+            class="text-left text-neutral-700 hover:text-violet-600 rounded-md px-2 py-1 hover:bg-violet-100">E-commerce</button>
+          <button
+            class="text-left text-neutral-700 hover:text-violet-600 rounded-md px-2 py-1 hover:bg-violet-100">SaaS</button>
+          <button
+            class="text-left text-neutral-700 hover:text-violet-600 rounded-md px-2 py-1 hover:bg-violet-100">Fintech</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Gallery Toolbar -->
+  <section class="px-8 pb-6 pt-12">
+    <div class="max-w-7xl mx-auto flex items-center justify-between pb-4 mb-2">
+      <p id="resultsCount" class="text-sm text-neutral-600">Showing 0 of 0 ads</p>
+      <div class="flex items-center space-x-2">
+        <label for="sortSelect" class="text-sm text-neutral-700">Sort by:</label>
+        <select id="sortSelect"
+          class="text-sm border border-neutral-300 bg-white px-3 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500">
+          <option value="newest">Newest</option>
+          <option value="oldest">Oldest</option>
+          <option value="popular">Most Popular</option>
+          <option value="size">Size</option>
+        </select>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <main class="px-8 pb-16">
+    <div id="gallery"
+      class="columns-1 sm:columns-2 lg:columns-3 xl:columns-5 gap-6 space-y-6 max-w-7xl mx-auto"></div>
+    <div id="loading" class="text-center text-neutral-500 py-10 hidden">Loading more ads…</div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="px-8 py-12 border-t border-neutral-200 text-center text-sm text-neutral-500">
+    <p>© 2025 Ad Archive · Crafted with <span class="text-pink-500">♥</span></p>
+  </footer>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="hidden fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+    <div class="relative flex flex-col items-center">
+      <!-- Box -->
+      <div
+        class="bg-white rounded-xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh] max-w-full sm:max-w-3xl">
+        <!-- Creative -->
+        <div id="lightboxCreative"
+          class="flex-1 bg-neutral-100 flex items-center justify-center"></div>
+        <!-- Details -->
+        <div class="p-6 border-t border-neutral-200 w-full">
+          <h2 id="lightboxTitle" class="text-2xl font-bold mb-2"></h2>
+          <p id="lightboxDetails" class="text-neutral-600"></p>
+          <p id="lightboxTags" class="text-sm text-neutral-500 italic mt-1"></p>
+          <div class="mt-2 flex items-center space-x-2">
+            <button id="lightboxHeart"
+              class="text-neutral-500 hover:text-pink-500 transition text-xl">🤍</button>
+            <span id="lightboxLikes" class="text-sm text-neutral-600">0</span>
+          </div>
+        </div>
+      </div>
+      <!-- Close -->
+      <button id="lightboxClose"
+        class="absolute -top-6 -right-6 bg-white text-neutral-600 hover:text-violet-500 text-2xl w-10 h-10 rounded-full shadow-lg flex items-center justify-center">&times;</button>
+    </div>
+  </div>
+
+  <script>
+    // --- Elements ---
+    const searchInput = document.getElementById("searchInput");
+    const filtersPanel = document.getElementById("filtersPanel");
+    const overlay = document.getElementById("overlay");
+    const mobileSearchBtn = document.getElementById("mobileSearchBtn");
+    const gallery = document.getElementById("gallery");
+    const loading = document.getElementById("loading");
+    const resultsCount = document.getElementById("resultsCount");
+    const sortSelect = document.getElementById("sortSelect");
+
+    function openFilters() { filtersPanel.classList.remove("hidden"); overlay.classList.remove("hidden"); }
+    function closeFilters() { filtersPanel.classList.add("hidden"); overlay.classList.add("hidden"); }
+    searchInput?.addEventListener("focus", openFilters);
+    mobileSearchBtn.addEventListener("click", openFilters);
+    overlay.addEventListener("click", closeFilters);
+
+    // Mock ads
+    const sizes = ["300x250", "728x90", "160x600", "300x600", "970x250", "468x60"];
+    let ads = Array.from({ length: 40 }, (_, i) => {
+      const types = ["image", "gif", "video"];
+      const type = types[Math.floor(Math.random() * types.length)];
+      return {
+        id: i + 1,
+        title: `Ad #${i + 1}`,
+        category: i % 2 === 0 ? "Retail" : "Finance",
+        tags: i % 3 === 0 ? "Animated" : "Static",
+        size: sizes[i % sizes.length],
+        likes: Math.floor(Math.random() * 40),
+        liked: false,
+        type
+      };
+    });
+
+    function updateResultsCount() {
+      resultsCount.textContent = `Showing ${Math.min(loaded, ads.length)} of ${ads.length} ads`;
+    }
+
+    function renderCreative(ad) {
+      const [w, h] = ad.size.split("x");
+      if (ad.type === "image") {
+        return `<img src="https://picsum.photos/${w}/${h}?random=${ad.id}" class="w-full h-auto">`;
+      } else if (ad.type === "gif") {
+        return `<img src="https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif" class="w-full h-auto">`;
+      } else {
+        return `<video autoplay loop muted playsinline disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback" class="w-full h-auto"><source src="https://media.giphy.com/media/l0MYB8Ory7Hqefo9a/giphy.mp4" type="video/mp4"></video>`;
+      }
+    }
+
+    function renderCard(ad) {
+      const card = document.createElement("div");
+      card.className = "break-inside-avoid border border-neutral-200 bg-white  hover:shadow-xl transition cursor-pointer";
+      card.innerHTML = `
+        <div class=" overflow-hidden">${renderCreative(ad)}</div>
+        <div class="border-t border-neutral-200 p-4  bg-white">
+          <h2 class="text-lg font-semibold">${ad.title}</h2>
+          <div class="mt-1 flex items-center justify-between">
+            <p class="text-sm text-neutral-500">${ad.category} · ${ad.tags} · ${ad.size}</p>
+            <div class="flex items-center space-x-1">
+              <button class="heart-btn text-neutral-500 hover:text-pink-500 transition text-sm">${ad.liked ? "❤️" : "🤍"}</button>
+              <span class="like-count text-sm text-neutral-600">${ad.likes}</span>
+            </div>
+          </div>
+        </div>`;
+      card.querySelector("img, video").addEventListener("click", () => openLightbox(ad));
+      const heartBtn = card.querySelector(".heart-btn");
+      const likeCount = card.querySelector(".like-count");
+      heartBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        ad.liked = !ad.liked;
+        ad.likes += ad.liked ? 1 : -1;
+        heartBtn.textContent = ad.liked ? "❤️" : "🤍";
+        heartBtn.classList.toggle("text-pink-500", ad.liked);
+        likeCount.textContent = ad.likes;
+        if (currentAd && currentAd.id === ad.id) updateLightbox(ad);
+      });
+      return card;
+    }
+
+    let loaded = 0;
+    const batch = 12;
+    function loadAds() {
+      if (loaded >= ads.length) return;
+      loading.classList.remove("hidden");
+      setTimeout(() => {
+        ads.slice(loaded, loaded + batch).forEach(ad => gallery.appendChild(renderCard(ad)));
+        loaded += batch;
+        updateResultsCount();
+        loading.classList.add("hidden");
+      }, 400);
+    }
+
+    sortSelect.addEventListener("change", () => {
+      const v = sortSelect.value;
+      if (v === "newest") ads.sort((a, b) => b.id - a.id);
+      else if (v === "oldest") ads.sort((a, b) => a.id - b.id);
+      else if (v === "popular") ads.sort((a, b) => b.likes - a.likes);
+      else if (v === "size") ads.sort((a, b) => parseInt(b.size) - parseInt(a.size));
+      gallery.innerHTML = ""; loaded = 0; loadAds();
+    });
+
+    window.addEventListener("scroll", () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 200) loadAds();
+    });
+
+    const lightbox = document.getElementById("lightbox");
+    const lightboxCreative = document.getElementById("lightboxCreative");
+    const lightboxTitle = document.getElementById("lightboxTitle");
+    const lightboxDetails = document.getElementById("lightboxDetails");
+    const lightboxTags = document.getElementById("lightboxTags");
+    const lightboxHeart = document.getElementById("lightboxHeart");
+    const lightboxLikes = document.getElementById("lightboxLikes");
+    const lightboxClose = document.getElementById("lightboxClose");
+
+    let currentAd = null;
+
+    function updateLightbox(ad) {
+      const [w, h] = ad.size.split("x");
+      if (ad.type === "image") {
+        lightboxCreative.innerHTML = `<img src="https://picsum.photos/${w}/${h}?random=${ad.id}" class="h-auto max-h-[60vh] w-auto max-w-full object-contain">`;
+      } else if (ad.type === "gif") {
+        lightboxCreative.innerHTML = `<img src="https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif" class="h-auto max-h-[60vh] w-auto max-w-full object-contain">`;
+      } else {
+        lightboxCreative.innerHTML = `<video autoplay loop muted playsinline disablepictureinpicture controlslist="nodownload nofullscreen noremoteplayback" class="h-auto max-h-[60vh] w-auto max-w-full object-contain"><source src="https://media.giphy.com/media/l0MYB8Ory7Hqefo9a/giphy.mp4" type="video/mp4"></video>`;
+      }
+      lightboxTitle.textContent = ad.title;
+      lightboxDetails.textContent = `Category: ${ad.category} · Size: ${ad.size}`;
+      lightboxTags.textContent = `Tags: ${ad.tags}`;
+      lightboxLikes.textContent = ad.likes;
+      lightboxHeart.textContent = ad.liked ? "❤️" : "🤍";
+      lightboxHeart.classList.toggle("text-pink-500", ad.liked);
+    }
+
+    function openLightbox(ad) { currentAd = ad; updateLightbox(ad); lightbox.classList.remove("hidden"); }
+    function closeLightbox() { lightbox.classList.add("hidden"); }
+    lightboxClose.addEventListener("click", closeLightbox);
+    lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
+    lightboxHeart.addEventListener("click", () => {
+      if (!currentAd) return;
+      currentAd.liked = !currentAd.liked;
+      currentAd.likes += currentAd.liked ? 1 : -1;
+      updateLightbox(currentAd);
+      const cards = document.querySelectorAll("#gallery .like-count");
+      if (cards[currentAd.id - 1]) cards[currentAd.id - 1].textContent = currentAd.likes;
+    });
+
+    loadAds();
+  </script>
+</body>
+</html>
