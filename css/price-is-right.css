@@ -1,34 +1,188 @@
 /* ===========================
    PRICE IS RIGHT LIVE! CONTEST
-   Instagram Getaway Landing Page
+   Complete Standalone Styles
    Fallsview Casino Resort
    =========================== */
 
-/* Import the base styles from main.css */
-@import url('main.css');
-
 /* ===========================
-   PRICE IS RIGHT THEME OVERRIDES
+   CSS VARIABLES
    =========================== */
 
 :root {
-  /* Price is Right Brand Colors */
+  /* Price is Right Theme Colors */
   --pir-yellow: #FFD700;
   --pir-red: #E31837;
   --pir-blue: #0066CC;
   --pir-green: #00A651;
   
-  /* Updated Gradients for PIR Theme */
+  /* Primary Colors */
+  --primary-orange: #FF6900;
+  --primary-orange-light: #ff8a37;
+  --primary-orange-dark: #e55f00;
+  
+  --secondary-gold: #FFD700;
+  --accent-purple: #8B5CF6;
+  --accent-pink: #EC4899;
+  
+  /* Dark Backgrounds */
+  --dark-bg: #0a0a0a;
+  --dark-bg-secondary: #1a1a1a;
+  --dark-bg-tertiary: #2a2a2a;
+  
+  /* Text Colors */
+  --text-primary: #ffffff;
+  --text-secondary: #c4c4c4;
+  --text-muted: #808080;
+  
+  /* Gradients */
   --gradient-primary: linear-gradient(135deg, #E31837 0%, #FF6B35 100%);
   --gradient-secondary: linear-gradient(135deg, #0066CC 0%, #00A651 100%);
   --gradient-gold: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
   --gradient-vibrant: linear-gradient(135deg, #E31837 0%, #FFD700 50%, #0066CC 100%);
+  --gradient-dark: linear-gradient(180deg, rgba(10, 10, 10, 0) 0%, rgba(10, 10, 10, 1) 100%);
+  --gradient-instagram: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #FCAF45 100%);
+  
+  /* Spacing */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-2xl: 4rem;
+  
+  /* Border Radius */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-full: 9999px;
+  
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
+  --shadow-glow: 0 0 40px rgba(255, 105, 0, 0.3);
+  --shadow-glow-red: 0 0 40px rgba(227, 24, 55, 0.3);
+  
+  /* Transitions */
+  --transition-fast: 0.2s ease;
+  --transition-medium: 0.3s ease;
+  --transition-slow: 0.5s ease;
 }
 
 /* ===========================
-   CONFETTI ANIMATION
+   RESET & BASE
    =========================== */
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background-color: var(--dark-bg);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: var(--pir-yellow);
+  text-decoration: none;
+  transition: var(--transition-medium);
+}
+
+a:hover {
+  color: var(--primary-orange-light);
+}
+
+/* ===========================
+   BACKGROUND ANIMATION
+   =========================== */
+
+.background-animation {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.float-element {
+  position: absolute;
+  border-radius: 50%;
+  background: var(--gradient-primary);
+  opacity: 0.05;
+  animation: float 20s infinite ease-in-out;
+}
+
+.float-1 {
+  width: 300px;
+  height: 300px;
+  top: 10%;
+  left: 5%;
+  animation-delay: 0s;
+}
+
+.float-2 {
+  width: 200px;
+  height: 200px;
+  top: 60%;
+  right: 10%;
+  background: var(--gradient-secondary);
+  animation-delay: 2s;
+}
+
+.float-3 {
+  width: 150px;
+  height: 150px;
+  bottom: 20%;
+  left: 15%;
+  background: var(--gradient-gold);
+  animation-delay: 4s;
+}
+
+.float-4 {
+  width: 250px;
+  height: 250px;
+  top: 40%;
+  right: 30%;
+  animation-delay: 6s;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  25% {
+    transform: translate(30px, -30px) scale(1.1);
+  }
+  50% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  75% {
+    transform: translate(20px, 30px) scale(1.05);
+  }
+}
+
+/* Confetti Elements */
 .confetti-element {
   position: absolute;
   font-size: 2rem;
@@ -79,14 +233,49 @@
 }
 
 /* ===========================
-   INSTAGRAM BADGE
+   CONTAINER
    =========================== */
 
+.contest-container,
+.thank-you-container {
+  position: relative;
+  z-index: 1;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: var(--spacing-lg);
+}
+
+/* ===========================
+   HERO SECTION
+   =========================== */
+
+.hero-section {
+  text-align: center;
+  padding: var(--spacing-2xl) 0;
+  margin-bottom: var(--spacing-xl);
+}
+
+.hero-content {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.logo-wrapper {
+  margin-bottom: var(--spacing-xl);
+}
+
+.main-logo {
+  width: 150px;
+  margin: 0 auto;
+  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.3));
+}
+
+/* Instagram Badge */
 .instagram-badge {
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-sm);
-  background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #FCAF45 100%);
+  background: var(--gradient-instagram);
   padding: var(--spacing-sm) var(--spacing-lg);
   border-radius: var(--radius-full);
   margin-bottom: var(--spacing-lg);
@@ -106,10 +295,46 @@
   letter-spacing: 0.1em;
 }
 
-/* ===========================
-   CONTEST PERIOD BADGE
-   =========================== */
+/* Headline */
+.headline-wrapper {
+  margin-bottom: var(--spacing-lg);
+}
 
+.main-headline {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: var(--spacing-md);
+}
+
+.headline-top {
+  display: block;
+  font-weight: 700;
+  font-size: 0.6em;
+  letter-spacing: 0.05em;
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.headline-bottom {
+  display: block;
+  background: var(--gradient-vibrant);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.headline-underline {
+  width: 100px;
+  height: 4px;
+  background: var(--gradient-primary);
+  margin: var(--spacing-md) auto;
+  border-radius: var(--radius-full);
+}
+
+/* Contest Period Badge */
 .contest-period-badge {
   background: rgba(255, 215, 0, 0.1);
   border: 2px solid var(--pir-yellow);
@@ -117,6 +342,7 @@
   padding: var(--spacing-lg) var(--spacing-xl);
   margin-bottom: var(--spacing-lg);
   box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+  display: inline-block;
 }
 
 .period-content {
@@ -145,10 +371,7 @@
   font-style: italic;
 }
 
-/* ===========================
-   INFLUENCER CREDIT
-   =========================== */
-
+/* Influencer Credit */
 .influencer-credit {
   margin-top: var(--spacing-md);
 }
@@ -164,9 +387,38 @@
 }
 
 /* ===========================
-   GRAND PRIZE CARD
+   PRIZE SECTION
    =========================== */
 
+.prize-section {
+  padding: var(--spacing-2xl) 0;
+  margin-bottom: var(--spacing-xl);
+}
+
+.section-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+}
+
+.section-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+  background: var(--gradient-gold);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.title-decoration {
+  width: 80px;
+  height: 3px;
+  background: var(--gradient-primary);
+  margin: 0 auto;
+  border-radius: var(--radius-full);
+}
+
+/* Grand Prize Card */
 .grand-prize-wrapper {
   max-width: 900px;
   margin: 0 auto;
@@ -238,10 +490,7 @@
   letter-spacing: 0.05em;
 }
 
-/* ===========================
-   PRIZE DETAILS
-   =========================== */
-
+/* Prize Details */
 .prize-details {
   display: flex;
   flex-direction: column;
@@ -308,6 +557,143 @@
   font-size: 0.875rem;
   color: var(--text-muted);
   font-style: italic;
+}
+
+/* ===========================
+   CTA SECTION
+   =========================== */
+
+.cta-section {
+  text-align: center;
+  padding: var(--spacing-2xl);
+  background: linear-gradient(145deg, rgba(227, 24, 55, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+  border-radius: var(--radius-xl);
+  margin-bottom: var(--spacing-xl);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.3;
+  z-index: 0;
+}
+
+.cta-content {
+  position: relative;
+  z-index: 1;
+}
+
+.cta-badge {
+  display: inline-block;
+  background: rgba(255, 215, 0, 0.2);
+  border: 1px solid var(--secondary-gold);
+  color: var(--secondary-gold);
+  padding: var(--spacing-xs) var(--spacing-md);
+  border-radius: var(--radius-full);
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: var(--spacing-md);
+}
+
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+.cta-title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  margin-bottom: var(--spacing-sm);
+}
+
+.cta-subtitle {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xl);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.enter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  background: var(--gradient-primary);
+  color: white;
+  font-size: 1.25rem;
+  font-weight: 700;
+  padding: 1.25rem 3rem;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition-medium);
+  box-shadow: 0 8px 24px rgba(227, 24, 55, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.enter-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: var(--transition-slow);
+}
+
+.enter-btn:hover::before {
+  left: 100%;
+}
+
+.enter-btn:hover {
+  transform: translateY(-2px) scale(1.05);
+  box-shadow: 0 12px 32px rgba(227, 24, 55, 0.5);
+}
+
+.enter-btn:active {
+  transform: translateY(0) scale(1);
+}
+
+.btn-text {
+  position: relative;
+  z-index: 1;
+}
+
+.btn-icon {
+  font-size: 1.5rem;
+  transition: var(--transition-medium);
+}
+
+.enter-btn:hover .btn-icon {
+  transform: translateX(5px);
+}
+
+.cta-note {
+  margin-top: var(--spacing-md);
+  font-size: 0.875rem;
+  color: var(--text-muted);
 }
 
 /* ===========================
@@ -379,9 +765,130 @@
 }
 
 /* ===========================
-   PRIZE REMINDER (Thank You Page)
+   FEATURES SECTION
    =========================== */
 
+.features-section {
+  padding: var(--spacing-xl) 0;
+  margin-bottom: var(--spacing-xl);
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+}
+
+.feature-item {
+  text-align: center;
+  padding: var(--spacing-lg);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-md);
+  transition: var(--transition-medium);
+}
+
+.feature-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(227, 24, 55, 0.2);
+}
+
+.feature-icon {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.feature-item h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+  color: var(--text-primary);
+}
+
+.feature-item p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ===========================
+   THANK YOU PAGE
+   =========================== */
+
+.thank-you-content {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+  padding: var(--spacing-2xl) 0;
+}
+
+.success-animation {
+  margin: var(--spacing-xl) 0;
+}
+
+.checkmark-circle {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: scale-in 0.5s ease-out;
+  box-shadow: 0 0 60px rgba(227, 24, 55, 0.5);
+}
+
+@keyframes scale-in {
+  0% {
+    transform: scale(0);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.checkmark {
+  font-size: 4rem;
+  color: white;
+  font-weight: 700;
+  animation: checkmark-appear 0.3s 0.3s ease-out both;
+}
+
+@keyframes checkmark-appear {
+  0% {
+    transform: scale(0) rotate(-45deg);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+
+.thank-you-message {
+  margin-bottom: var(--spacing-xl);
+}
+
+.thank-you-title {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 700;
+  margin-bottom: var(--spacing-sm);
+  background: var(--gradient-vibrant);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.thank-you-subtitle {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+}
+
+/* Prize Reminder */
 .prize-reminder {
   background: linear-gradient(145deg, rgba(227, 24, 55, 0.1) 0%, rgba(0, 102, 204, 0.1) 100%);
   border-radius: var(--radius-lg);
@@ -424,9 +931,67 @@
   margin-top: var(--spacing-sm);
 }
 
-/* ===========================
-   CTA BUTTONS (Thank You Page)
-   =========================== */
+/* Info Cards */
+.info-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-2xl);
+}
+
+.info-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  transition: var(--transition-medium);
+}
+
+.info-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(227, 24, 55, 0.3);
+}
+
+.info-icon {
+  font-size: 3rem;
+  margin-bottom: var(--spacing-md);
+}
+
+.info-card h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-primary);
+}
+
+.info-card p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* Next Steps */
+.next-steps {
+  background: linear-gradient(145deg, rgba(227, 24, 55, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-2xl);
+  margin-bottom: var(--spacing-xl);
+}
+
+.next-steps-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+}
+
+.next-steps-text {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xl);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .cta-buttons {
   display: flex;
@@ -456,6 +1021,7 @@
 .cta-button.primary:hover {
   transform: translateY(-2px);
   box-shadow: 0 12px 32px rgba(227, 24, 55, 0.5);
+  color: white;
 }
 
 .cta-button.secondary {
@@ -467,11 +1033,27 @@
 .cta-button.secondary:hover {
   background: rgba(255, 255, 255, 0.1);
   border-color: var(--pir-yellow);
+  color: var(--text-primary);
 }
 
-/* ===========================
-   SHARE SECTION UPDATES
-   =========================== */
+.btn-arrow {
+  transition: var(--transition-medium);
+}
+
+.cta-button:hover .btn-arrow {
+  transform: translateX(5px);
+}
+
+/* Share Section */
+.share-section {
+  margin-bottom: var(--spacing-xl);
+}
+
+.share-text {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xs);
+}
 
 .share-subtext {
   font-size: 0.875rem;
@@ -483,10 +1065,220 @@
   color: var(--pir-yellow);
 }
 
+.share-link {
+  display: inline-block;
+  color: var(--pir-yellow);
+  font-weight: 600;
+  padding: var(--spacing-sm);
+  border-bottom: 2px solid transparent;
+  transition: var(--transition-medium);
+}
+
+.share-link:hover {
+  border-bottom-color: var(--pir-yellow);
+}
+
 /* ===========================
-   FORM STYLES (if using custom form)
+   LEGAL & FOOTER
    =========================== */
 
+.legal-section {
+  padding: var(--spacing-xl) 0;
+  margin-bottom: var(--spacing-lg);
+}
+
+.legal-text {
+  font-size: 0.75rem;
+  line-height: 1.6;
+  color: var(--text-muted);
+  text-align: center;
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-md);
+}
+
+.main-footer {
+  padding: var(--spacing-xl) 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-content {
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-md);
+  font-size: 0.875rem;
+}
+
+.footer-links a {
+  color: var(--pir-yellow);
+  transition: var(--transition-medium);
+}
+
+.footer-links a:hover {
+  color: var(--primary-orange-light);
+  text-decoration: underline;
+}
+
+.separator {
+  color: var(--text-muted);
+}
+
+.footer-logo {
+  margin: var(--spacing-md) 0;
+}
+
+.playsmart-logo {
+  width: 100px;
+  margin: 0 auto;
+  opacity: 0.8;
+  transition: var(--transition-medium);
+}
+
+.playsmart-logo:hover {
+  opacity: 1;
+}
+
+.copyright {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+/* ===========================
+   MODAL
+   =========================== */
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-overlay.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-md);
+}
+
+.modal-content {
+  position: relative;
+  background: var(--dark-bg);
+  border: 1px solid rgba(227, 24, 55, 0.2);
+  border-radius: var(--radius-lg);
+  max-width: 1000px;
+  width: 100%;
+  max-height: 90vh;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+  animation: slideUp 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(50px) scale(0.95);
+  }
+}
+
+.modal-close {
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-md);
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 50%;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition-medium);
+}
+
+.modal-close:hover {
+  background: rgba(227, 24, 55, 0.9);
+  transform: rotate(90deg);
+}
+
+.modal-header {
+  background: var(--gradient-primary);
+  padding: var(--spacing-xl);
+  text-align: center;
+}
+
+.modal-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-xs);
+  color: white;
+}
+
+.modal-subtitle {
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.modal-body {
+  padding: 0;
+  height: calc(90vh - 150px);
+  overflow-y: auto;
+}
+
+.modal-body iframe {
+  width: 100%;
+  min-height: 600px;
+  height: 100%;
+  border: none;
+  display: block;
+}
+
+/* Form Styles (if using custom form) */
 .contest-form {
   max-width: 600px;
   margin: 0 auto;
@@ -571,10 +1363,73 @@
 }
 
 /* ===========================
-   RESPONSIVE OVERRIDES
+   ANIMATIONS
+   =========================== */
+
+.fade-in {
+  animation: fadeInUp 0.8s ease;
+}
+
+.slide-up {
+  animation: fadeInUp 1s ease 0.2s both;
+}
+
+.bounce-in {
+  animation: bounceIn 1s ease 0.4s both;
+}
+
+.fade-in-delay {
+  animation: fadeInUp 1s ease 0.6s both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
    =========================== */
 
 @media (max-width: 768px) {
+  :root {
+    --spacing-xl: 2rem;
+    --spacing-2xl: 3rem;
+  }
+
+  .contest-container,
+  .thank-you-container {
+    padding: var(--spacing-md);
+  }
+
+  .main-logo {
+    width: 100px;
+  }
+
   .instagram-badge {
     font-size: 0.875rem;
     padding: var(--spacing-sm) var(--spacing-md);
@@ -601,6 +1456,11 @@
     grid-template-columns: 1fr;
   }
 
+  .features-grid,
+  .info-cards {
+    grid-template-columns: 1fr;
+  }
+
   .reminder-items {
     flex-direction: column;
     align-items: center;
@@ -615,30 +1475,76 @@
     width: 100%;
     justify-content: center;
   }
+
+  .enter-btn {
+    font-size: 1rem;
+    padding: 1rem 2rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .modal-wrapper {
+    padding: 0;
+  }
+
+  .modal-content {
+    max-width: 100%;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  .modal-body {
+    height: calc(100vh - 150px);
+  }
+
+  .footer-links {
+    flex-direction: column;
+    gap: var(--spacing-xs);
+  }
+
+  .separator {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .grand-prize-card .prize-icon {
+    font-size: 3.5rem;
+  }
+
+  .cta-section {
+    padding: var(--spacing-lg);
+  }
 }
 
 /* ===========================
-   ACCESSIBILITY ENHANCEMENTS
+   ACCESSIBILITY
    =========================== */
 
 @media (prefers-reduced-motion: reduce) {
-  .confetti-element,
-  .float-element {
-    animation: none;
-  }
-
-  .prize-icon {
-    animation: none;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
-/* High contrast mode support */
 @media (prefers-contrast: high) {
-  .prize-item {
+  .prize-item,
+  .step-item,
+  .feature-item {
     border-width: 2px;
   }
+}
 
-  .step-item {
-    border-width: 2px;
+/* Print Styles */
+@media print {
+  .background-animation,
+  .modal-overlay,
+  .enter-btn,
+  .confetti-element {
+    display: none !important;
   }
 }
