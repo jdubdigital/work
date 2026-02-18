@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Contest: Food Con - Fallsview Food & Drink Fest</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/main.css">
+  
+  <!-- External Scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" defer></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src="js/modal.js" defer></script>
+</head>
+<body>
+  <div class="modern-banner">
+    <div class="banner-content">
+      <!-- Logo -->
+      <div class="logo-container">
+        <img src="/img/FFDF_Logo_2024_noback-white-V4.png" alt="Fallsview Food & Drink Fest Logo">
+      </div>
+
+      <!-- Main Title -->
+      <h1 class="show-title">ONE TICKET, UNLIMITED FLAVOUR</h1>
+
+      <!-- Event Details -->
+      <p class="show-details event-date">Saturday, June 7, 2025: 1PM – 5PM</p>
+      <p class="show-details">
+        Enjoy an afternoon food expo of roaming culinary experiences, showcasing the region's finest food and drink designers. 
+        Sip and savour with host John Catucci, while celebrity chefs whip up delectable treats in live action demos on the Main Stage. 
+        Music by DJ RECON.
+      </p>
+      <p class="show-details">
+        Learn more about 
+        <a href="https://fallsviewcasinoresort.com/fallsview-food-and-drink-fest.html" target="_blank">Fallsview Food and Drink Fest</a>
+      </p>
+
+      <!-- Contest Prizes -->
+      <h3 class="show-title-2">ENTER FOR A CHANCE TO WIN ONE OF THE FOLLOWING:</h3>
+      
+      <p class="show-details prize-title">GRAND PRIZE</p>
+      <p class="show-details">
+        - One (1) Night stay at Fallsview Casino Resort on Saturday, June 7th, 2025<br>
+        - Two (2) Tickets to Fallsview Food Con on Saturday, June 7th, 2025<br>
+        - Complimentary Parking
+      </p>
+
+      <p class="show-details prize-title">THREE SECONDARY PRIZES AVAILABLE TO BE WON</p>
+      <p class="show-details">
+        - Two (2) Tickets to Fallsview Food Con on Saturday, June 7th, 2025<br>
+        - Complimentary Parking
+      </p>
+
+      <!-- Sponsor -->
+      <p class="show-details">
+        <em>Prizing Provided by</em>
+        <a href="https://www.olg.ca/en/lottery/self-serve-lottery/About.html" target="_blank">
+          <img src="/img/OLG_3c.png" alt="OLG Logo" class="sponsor-logo">
+        </a>
+      </p>
+
+      <!-- CTA Button -->
+      <button class="custom-btn" id="openContestBtn">CLICK HERE TO ENTER!</button>
+
+      <!-- Legal Text -->
+      <p class="legal">
+        The Contest is open to individuals who, prior to the start of the Contest Period and at the time of entry are 19 years of age or older. 
+        Individuals must be in good standing of Momentum in order to redeem the Prize. If an Individual is not a Momentum cardholder, they must 
+        sign up in order to redeem their Prize. Registration for Momentum is free.
+      </p>
+
+      <!-- Footer -->
+      <footer class="site-footer">
+        <div class="footer-content">
+          <p>&copy; 2025 Fallsview Casino Resort. All rights reserved.</p>
+          <p>
+            <a href="https://fallsviewcasinoresort.com/policies/privacy-policy.html" target="_blank">Privacy Policy</a> |
+            <a href="https://fallsviewcasinoresort.com/policies/momentum-terms-and-conditions.html" target="_blank">Terms of Use</a> |
+            <a href="https://fallsviewcasinoresort.com/food-con-contest-rules.html" target="_blank">Official Rules</a>
+          </p>
+          <a href="https://www.playsmart.ca/" target="_blank">
+            <img class="playsmart" src="/img/playsmart.png" alt="Play Smart Logo">
+          </a>
+        </div>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="contestModal">
+    <div class="modal-content">
+      <button class="close-button" id="closeModalBtn" aria-label="Close modal">
+        <span>&times;</span>
+      </button>
+      <iframe 
+        id="acousticForm" 
+        title="FFDF Contest Food Con" 
+        src="https://content-us-1.content-cms.com/api/1c055af1-507a-468a-96a8-a3de6cd1f2a3/forms/709946227225878528"
+      ></iframe>
+    </div>
+  </div>
+</body>
+</html>

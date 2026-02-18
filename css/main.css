@@ -1,0 +1,486 @@
+/* ===========================
+   FALLSVIEW FOOD & DRINK FEST
+   Contest Landing Page Styles
+   =========================== */
+
+/* Font Imports */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+/* ===========================
+   BASE STYLES
+   =========================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: #000000;
+  font-family: "Poppins", sans-serif;
+  margin: 0;
+}
+
+/* ===========================
+   LOGO
+   =========================== */
+
+.logo-container {
+  z-index: 2;
+  margin-bottom: 1.5rem;
+}
+
+.logo-container img {
+  height: auto;
+  width: 90px;
+}
+
+/* ===========================
+   MAIN BANNER
+   =========================== */
+
+.modern-banner {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.9)), 
+              url('../img/FFDF24-VIP-03273.jpg') center left 20% / cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  text-align: center;
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.modern-banner::-webkit-scrollbar {
+  display: none;
+}
+
+.modern-banner::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.banner-content {
+  position: relative;
+  z-index: 2;
+  padding: 3%;
+  max-width: 50%;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 -1px 10px rgba(0, 0, 0, 0.3);
+  animation: fadeIn 1s ease-out;
+}
+
+/* ===========================
+   TYPOGRAPHY
+   =========================== */
+
+.show-title {
+  font-size: 3.2em;
+  font-weight: 300;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  line-height: 1.2em;
+  animation: fadeIn 1s ease-out;
+}
+
+.show-title span {
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-weight: 200;
+}
+
+.show-title-2 {
+  font-size: 2.1em;
+  font-weight: 300;
+  letter-spacing: 2px;
+  margin-bottom: 10px;
+  margin-top: 2rem;
+  line-height: 1.2em;
+  animation: fadeIn 1s ease-out;
+}
+
+.show-details {
+  margin-top: 10px;
+  line-height: 1.3em;
+  color: #c4c4c4;
+  animation: fadeIn 1s ease-out;
+}
+
+.show-details a {
+  color: #fff;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.show-details a:hover {
+  color: #FF6900;
+}
+
+.event-date {
+  font-weight: bold;
+}
+
+.prize-title {
+  font-weight: bold;
+  margin-top: 1.5rem;
+}
+
+.sponsor-logo {
+  width: 30px;
+  margin: 0px 8px -5px 8px;
+}
+
+.legal {
+  font-size: clamp(0.625rem, 0.5958rem + 0.1246vw, 0.75rem);
+  padding: 2rem 10% 1rem;
+  text-align: center;
+  color: #c4c4c4;
+  line-height: 1.4;
+}
+
+/* ===========================
+   BUTTONS
+   =========================== */
+
+.custom-btn {
+  margin: 2rem 0 1rem;
+  padding: 1rem 4rem;
+  border-radius: 50px;
+  background-color: #FF6900;
+  display: inline-block;
+  font-size: 1.3em;
+  font-weight: 700;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  animation: fadeIn 1s ease-out;
+}
+
+.custom-btn:hover {
+  background: #ff8a37;
+  transform: scale(1.05);
+  box-shadow: 0 5px 20px rgba(255, 105, 0, 0.4);
+}
+
+.custom-btn:active {
+  transform: scale(0.98);
+}
+
+/* ===========================
+   MODAL
+   =========================== */
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.95);
+  backdrop-filter: blur(5px);
+  z-index: 999;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.modal-overlay.active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  position: relative;
+  margin: 5% auto;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  background: black;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  animation: slideUp 0.4s ease-out;
+}
+
+.modal-content::-webkit-scrollbar {
+  display: none;
+}
+
+.modal-content iframe {
+  width: 100%;
+  height: 100vh;
+  border: none;
+  display: block;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 32px;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+}
+
+.close-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: rotate(90deg);
+}
+
+.close-button span {
+  line-height: 1;
+}
+
+/* ===========================
+   FOOTER
+   =========================== */
+
+.site-footer {
+  color: #ccc;
+  text-align: center;
+  font-size: 0.9em;
+  font-family: "Poppins", sans-serif;
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  margin-top: 2rem;
+  padding: 1rem 0;
+}
+
+.footer-content {
+  max-width: 100%;
+}
+
+.footer-content p {
+  margin: 0.5rem 0;
+}
+
+.site-footer a {
+  color: #ff6900;
+  text-decoration: none;
+  margin: 0 0.3em;
+  transition: color 0.3s ease;
+}
+
+.site-footer a:hover {
+  color: #ff8a37;
+  text-decoration: underline;
+}
+
+.playsmart {
+  width: 100px;
+  margin-top: 1rem;
+  transition: opacity 0.3s ease;
+}
+
+.playsmart:hover {
+  opacity: 0.8;
+}
+
+/* ===========================
+   ANIMATIONS
+   =========================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(100px);
+  }
+}
+
+/* ===========================
+   FORM STYLES (if needed)
+   =========================== */
+
+.form-header {
+  text-align: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+  flex-direction: row;
+  border-radius: 30px;
+  padding: 0px 15px;
+}
+
+.form-col {
+  text-align: left;
+  z-index: 2;
+}
+
+.form-col h5 {
+  line-height: 1.4em;
+  font-size: 1.1em;
+  font-weight: 400;
+  font-family: 'Courier New', Courier, monospace;
+}
+
+.form-header h4 {
+  margin: 0;
+  font-weight: 500;
+  font-size: clamp(1rem, 0.6787rem + 1.3707vw, 2.375rem);
+  font-family: "Poppins", sans-serif;
+}
+
+.form-header img {
+  max-width: 40%;
+  border-radius: 20px;
+}
+
+/* ===========================
+   RESPONSIVE DESIGN
+   =========================== */
+
+/* Tablet and smaller */
+@media (max-width: 768px) {
+  .modern-banner {
+    height: auto;
+    background-position: center center;
+  }
+
+  .banner-content {
+    max-width: 100%;
+    margin: 0;
+  }
+
+  .logo-container img {
+    width: 70px;
+  }
+
+  .show-title {
+    font-size: clamp(1.5rem, 5vw, 3rem);
+  }
+
+  .show-title-2 {
+    font-size: 1.2em;
+    font-weight: bold;
+  }
+
+  .show-details {
+    font-size: clamp(0.75rem, 0.6916rem + 0.2492vw, 1rem);
+  }
+
+  .custom-btn {
+    font-size: 1em;
+    padding: 1rem 2rem;
+  }
+
+  .site-footer {
+    font-size: 0.8em;
+  }
+
+  .form-col h5 {
+    font-size: 1em;
+  }
+
+  .modal-content {
+    margin: 0;
+    height: 100%;
+  }
+}
+
+/* Desktop and larger */
+@media (min-width: 750px) {
+  .modern-banner {
+    height: auto;
+  }
+
+  .banner-content {
+    margin: 2rem 0;
+    border: 1px solid #333;
+    border-radius: 8px;
+  }
+
+  .logo-container img {
+    width: 130px;
+  }
+
+  .show-title,
+  .show-title-2 {
+    font-size: clamp(0.875rem, 0.5829rem + 1.2461vw, 2.125rem);
+  }
+
+  .show-details {
+    font-size: clamp(0.875rem, 0.8458rem + 0.1246vw, 1rem);
+  }
+
+  .modal-content {
+    width: 90%;
+    max-width: 1200px;
+    height: 90%;
+    border-radius: 30px;
+  }
+
+  .top-banner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    align-items: center;
+  }
+
+  .top-banner h2,
+  .top-banner h5 {
+    text-align: center;
+  }
+}
+
+/* Large desktop */
+@media (min-width: 1200px) {
+  .show-title {
+    font-size: 3.2em;
+  }
+
+  .show-title-2 {
+    font-size: 2.1em;
+  }
+}
