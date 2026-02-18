@@ -1,0 +1,644 @@
+/* ===========================
+   PRICE IS RIGHT LIVE! CONTEST
+   Instagram Getaway Landing Page
+   Fallsview Casino Resort
+   =========================== */
+
+/* Import the base styles from main.css */
+@import url('main.css');
+
+/* ===========================
+   PRICE IS RIGHT THEME OVERRIDES
+   =========================== */
+
+:root {
+  /* Price is Right Brand Colors */
+  --pir-yellow: #FFD700;
+  --pir-red: #E31837;
+  --pir-blue: #0066CC;
+  --pir-green: #00A651;
+  
+  /* Updated Gradients for PIR Theme */
+  --gradient-primary: linear-gradient(135deg, #E31837 0%, #FF6B35 100%);
+  --gradient-secondary: linear-gradient(135deg, #0066CC 0%, #00A651 100%);
+  --gradient-gold: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  --gradient-vibrant: linear-gradient(135deg, #E31837 0%, #FFD700 50%, #0066CC 100%);
+}
+
+/* ===========================
+   CONFETTI ANIMATION
+   =========================== */
+
+.confetti-element {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.6;
+  animation: confetti-fall 8s infinite ease-in-out;
+  pointer-events: none;
+}
+
+.confetti-1 {
+  left: 15%;
+  top: -5%;
+  animation-delay: 0s;
+}
+
+.confetti-2 {
+  left: 45%;
+  top: -5%;
+  animation-delay: 2s;
+}
+
+.confetti-3 {
+  left: 75%;
+  top: -5%;
+  animation-delay: 4s;
+}
+
+.confetti-4 {
+  left: 85%;
+  top: -5%;
+  animation-delay: 6s;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 0.4;
+  }
+  100% {
+    transform: translateY(120vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* ===========================
+   INSTAGRAM BADGE
+   =========================== */
+
+.instagram-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #FCAF45 100%);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--spacing-lg);
+  box-shadow: 0 8px 24px rgba(131, 58, 180, 0.4);
+  animation: bounce-in 1s ease;
+}
+
+.instagram-icon {
+  font-size: 1.5rem;
+}
+
+.badge-text {
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* ===========================
+   CONTEST PERIOD BADGE
+   =========================== */
+
+.contest-period-badge {
+  background: rgba(255, 215, 0, 0.1);
+  border: 2px solid var(--pir-yellow);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg) var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
+  box-shadow: 0 0 30px rgba(255, 215, 0, 0.2);
+}
+
+.period-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.period-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-secondary);
+}
+
+.period-dates {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--pir-yellow);
+}
+
+.period-note {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ===========================
+   INFLUENCER CREDIT
+   =========================== */
+
+.influencer-credit {
+  margin-top: var(--spacing-md);
+}
+
+.influencer-text {
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.influencer-text strong {
+  color: var(--pir-yellow);
+  font-weight: 700;
+}
+
+/* ===========================
+   GRAND PRIZE CARD
+   =========================== */
+
+.grand-prize-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.grand-prize-card {
+  background: linear-gradient(145deg, rgba(227, 24, 55, 0.1) 0%, rgba(0, 102, 204, 0.1) 100%);
+  backdrop-filter: blur(10px);
+  border: 2px solid;
+  border-image: linear-gradient(135deg, #E31837, #FFD700, #0066CC) 1;
+  border-radius: var(--radius-xl);
+  padding: var(--spacing-2xl);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(227, 24, 55, 0.3);
+}
+
+.grand-prize-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 6px;
+  background: var(--gradient-vibrant);
+}
+
+.prize-header {
+  text-align: center;
+  margin-bottom: var(--spacing-xl);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.grand-prize-card .prize-icon {
+  font-size: 5rem;
+  margin-bottom: var(--spacing-md);
+  animation: prize-pulse 3s infinite;
+}
+
+@keyframes prize-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.grand-prize-card .prize-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: var(--gradient-vibrant);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: var(--spacing-sm);
+}
+
+.prize-value-badge {
+  display: inline-block;
+  background: var(--gradient-gold);
+  color: var(--dark-bg);
+  font-size: 1.125rem;
+  font-weight: 700;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ===========================
+   PRIZE DETAILS
+   =========================== */
+
+.prize-details {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+}
+
+.prize-item {
+  display: flex;
+  align-items: start;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-md);
+  border-left: 4px solid var(--pir-yellow);
+  transition: var(--transition-medium);
+}
+
+.prize-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  transform: translateX(8px);
+}
+
+.item-icon {
+  font-size: 2.5rem;
+  flex-shrink: 0;
+}
+
+.item-content {
+  flex: 1;
+}
+
+.item-content h4 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+  color: var(--text-primary);
+}
+
+.item-content p {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--spacing-xs);
+}
+
+.item-value {
+  display: inline-block;
+  font-size: 0.875rem;
+  color: var(--pir-yellow);
+  font-weight: 600;
+  background: rgba(255, 215, 0, 0.1);
+  padding: 0.25rem 0.75rem;
+  border-radius: var(--radius-sm);
+}
+
+.prize-footer {
+  text-align: center;
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.prize-note {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ===========================
+   HOW IT WORKS SECTION
+   =========================== */
+
+.how-it-works-section {
+  padding: var(--spacing-2xl) 0;
+  margin-bottom: var(--spacing-xl);
+}
+
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-xl);
+}
+
+.step-item {
+  text-align: center;
+  padding: var(--spacing-xl);
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  position: relative;
+  transition: var(--transition-medium);
+}
+
+.step-item:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(227, 24, 55, 0.3);
+  transform: translateY(-5px);
+}
+
+.step-number {
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  background: var(--gradient-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: white;
+  box-shadow: 0 4px 12px rgba(227, 24, 55, 0.4);
+}
+
+.step-icon {
+  font-size: 3rem;
+  margin: var(--spacing-md) 0;
+}
+
+.step-item h4 {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-sm);
+  color: var(--text-primary);
+}
+
+.step-item p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+/* ===========================
+   PRIZE REMINDER (Thank You Page)
+   =========================== */
+
+.prize-reminder {
+  background: linear-gradient(145deg, rgba(227, 24, 55, 0.1) 0%, rgba(0, 102, 204, 0.1) 100%);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  margin-bottom: var(--spacing-xl);
+  text-align: center;
+}
+
+.reminder-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: var(--spacing-md);
+  color: var(--text-primary);
+}
+
+.reminder-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
+}
+
+.reminder-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 1rem;
+  color: var(--text-secondary);
+}
+
+.reminder-icon {
+  font-size: 1.5rem;
+}
+
+.reminder-value {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--pir-yellow);
+  margin-top: var(--spacing-sm);
+}
+
+/* ===========================
+   CTA BUTTONS (Thank You Page)
+   =========================== */
+
+.cta-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  justify-content: center;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 1rem 2rem;
+  border-radius: var(--radius-full);
+  transition: var(--transition-medium);
+  text-decoration: none;
+}
+
+.cta-button.primary {
+  background: var(--gradient-primary);
+  color: white;
+  box-shadow: 0 8px 24px rgba(227, 24, 55, 0.4);
+}
+
+.cta-button.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(227, 24, 55, 0.5);
+}
+
+.cta-button.secondary {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-primary);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.cta-button.secondary:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--pir-yellow);
+}
+
+/* ===========================
+   SHARE SECTION UPDATES
+   =========================== */
+
+.share-subtext {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-top: var(--spacing-xs);
+}
+
+.share-subtext strong {
+  color: var(--pir-yellow);
+}
+
+/* ===========================
+   FORM STYLES (if using custom form)
+   =========================== */
+
+.contest-form {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: var(--spacing-xl);
+}
+
+.form-group {
+  margin-bottom: var(--spacing-lg);
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: var(--spacing-xs);
+  color: var(--text-primary);
+}
+
+.form-group input[type="text"],
+.form-group input[type="email"],
+.form-group input[type="date"] {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-size: 1rem;
+  transition: var(--transition-medium);
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--pir-yellow);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: start;
+}
+
+.checkbox-group label {
+  display: flex;
+  align-items: start;
+  gap: var(--spacing-sm);
+  cursor: pointer;
+  font-weight: 400;
+}
+
+.checkbox-group input[type="checkbox"] {
+  margin-top: 0.25rem;
+  cursor: pointer;
+}
+
+.checkbox-group a {
+  color: var(--pir-yellow);
+  text-decoration: underline;
+}
+
+.submit-btn {
+  width: 100%;
+  background: var(--gradient-primary);
+  color: white;
+  font-size: 1.125rem;
+  font-weight: 700;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  transition: var(--transition-medium);
+  box-shadow: 0 8px 24px rgba(227, 24, 55, 0.4);
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(227, 24, 55, 0.5);
+}
+
+.submit-btn:active {
+  transform: translateY(0);
+}
+
+/* ===========================
+   RESPONSIVE OVERRIDES
+   =========================== */
+
+@media (max-width: 768px) {
+  .instagram-badge {
+    font-size: 0.875rem;
+    padding: var(--spacing-sm) var(--spacing-md);
+  }
+
+  .period-dates {
+    font-size: 1.25rem;
+  }
+
+  .grand-prize-card {
+    padding: var(--spacing-lg);
+  }
+
+  .grand-prize-card .prize-title {
+    font-size: 1.75rem;
+  }
+
+  .prize-item {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .steps-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .reminder-items {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .cta-buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .cta-button {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* ===========================
+   ACCESSIBILITY ENHANCEMENTS
+   =========================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .confetti-element,
+  .float-element {
+    animation: none;
+  }
+
+  .prize-icon {
+    animation: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .prize-item {
+    border-width: 2px;
+  }
+
+  .step-item {
+    border-width: 2px;
+  }
+}

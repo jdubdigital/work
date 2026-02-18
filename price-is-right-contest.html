@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Price is Right Live! Instagram Getaway Contest - Fallsview Casino Resort</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap" rel="stylesheet">
+  
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/price-is-right.css">
+  
+  <!-- Scripts -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js" defer></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+  <script src="js/price-is-right-modal.js" defer></script>
+</head>
+<body>
+  <!-- Animated Background Elements -->
+  <div class="background-animation">
+    <div class="float-element float-1"></div>
+    <div class="float-element float-2"></div>
+    <div class="float-element float-3"></div>
+    <div class="float-element float-4"></div>
+    <div class="confetti-element confetti-1">🎉</div>
+    <div class="confetti-element confetti-2">🎊</div>
+    <div class="confetti-element confetti-3">⭐</div>
+    <div class="confetti-element confetti-4">✨</div>
+  </div>
+
+  <!-- Main Container -->
+  <div class="contest-container">
+    <!-- Hero Section -->
+    <section class="hero-section">
+      <div class="hero-content">
+        <!-- Logo -->
+        <div class="logo-wrapper fade-in">
+          <img src="/img/fallsview-casino-resort-logo.png" alt="Fallsview Casino Resort Logo" class="main-logo">
+        </div>
+
+        <!-- Instagram Badge -->
+        <div class="instagram-badge bounce-in">
+          <span class="instagram-icon">📱</span>
+          <span class="badge-text">Instagram Exclusive</span>
+        </div>
+
+        <!-- Main Headline -->
+        <div class="headline-wrapper slide-up">
+          <h1 class="main-headline">
+            <span class="headline-top">Price is Right Live!</span>
+            <span class="headline-bottom">Instagram Getaway Contest</span>
+          </h1>
+          <div class="headline-underline"></div>
+        </div>
+
+        <!-- Contest Period Badge -->
+        <div class="contest-period-badge fade-in-delay">
+          <div class="period-content">
+            <span class="period-label">Contest Period</span>
+            <span class="period-dates">March 25 - April 1, 2026</span>
+            <span class="period-note">Winner selected April 2 at 1:00 PM</span>
+          </div>
+        </div>
+
+        <!-- Influencer Credit -->
+        <div class="influencer-credit fade-in-delay">
+          <p class="influencer-text">
+            Brought to you in partnership with <strong>Grant Joseph</strong>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Prize Section -->
+    <section class="prize-section">
+      <div class="section-header">
+        <h2 class="section-title">Enter for a Chance to Win!</h2>
+        <div class="title-decoration"></div>
+      </div>
+
+      <!-- Single Grand Prize Card -->
+      <div class="grand-prize-wrapper">
+        <div class="grand-prize-card">
+          <div class="prize-header">
+            <div class="prize-icon">🎁</div>
+            <h3 class="prize-title">Ultimate Getaway Package</h3>
+            <div class="prize-value-badge">$850 Value</div>
+          </div>
+
+          <div class="prize-details">
+            <div class="prize-item">
+              <span class="item-icon">🎭</span>
+              <div class="item-content">
+                <h4>The Price is Right Live Tickets</h4>
+                <p>Two (2) complimentary tickets</p>
+                <span class="item-value">$150 CAD value</span>
+              </div>
+            </div>
+
+            <div class="prize-item">
+              <span class="item-icon">🏨</span>
+              <div class="item-content">
+                <h4>Luxury Hotel Stay</h4>
+                <p>One (1) night at Fallsview Casino Resort on Saturday, April 16 + complimentary parking</p>
+                <span class="item-value">$550 CAD value</span>
+              </div>
+            </div>
+
+            <div class="prize-item">
+              <span class="item-icon">🍽️</span>
+              <div class="item-content">
+                <h4>Dining Credit</h4>
+                <p>$150 dining credit to enjoy our world-class restaurants</p>
+                <span class="item-value">$150 CAD value</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="prize-footer">
+            <p class="prize-note">Approximate retail value of $850 CAD (excluding alcohol and gratuities)</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="cta-content">
+        <div class="cta-badge pulse">Limited Time Only</div>
+        <h2 class="cta-title">Ready to Enter?</h2>
+        <p class="cta-subtitle">Click below to enter for your chance to win this incredible getaway package</p>
+        <button class="enter-btn" id="openContestBtn">
+          <span class="btn-text">Click Here to Enter</span>
+          <span class="btn-icon">→</span>
+        </button>
+        <p class="cta-note">Free to enter • One entry per person • Must be 19+</p>
+      </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works-section">
+      <div class="section-header">
+        <h2 class="section-title">How It Works</h2>
+        <div class="title-decoration"></div>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-item">
+          <div class="step-number">1</div>
+          <div class="step-icon">📝</div>
+          <h4>Fill Out Form</h4>
+          <p>Enter your details in the contest form</p>
+        </div>
+        <div class="step-item">
+          <div class="step-number">2</div>
+          <div class="step-icon">✅</div>
+          <h4>Submit Entry</h4>
+          <p>Confirm you're 19+ and submit</p>
+        </div>
+        <div class="step-item">
+          <div class="step-number">3</div>
+          <div class="step-icon">🎊</div>
+          <h4>Wait for Results</h4>
+          <p>Winner announced April 2, 2026</p>
+        </div>
+        <div class="step-item">
+          <div class="step-number">4</div>
+          <div class="step-icon">🏆</div>
+          <h4>Claim Your Prize</h4>
+          <p>Winner will be contacted directly</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section">
+      <div class="features-grid">
+        <div class="feature-item">
+          <div class="feature-icon">🎉</div>
+          <h4>100% Free Entry</h4>
+          <p>No purchase necessary to enter or win</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">⚡</div>
+          <h4>Quick & Easy</h4>
+          <p>Enter in just 30 seconds</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🔒</div>
+          <h4>Secure & Private</h4>
+          <p>Your information is protected</p>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">✨</div>
+          <h4>Fair & Transparent</h4>
+          <p>Equal chances for all participants</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Legal Section -->
+    <section class="legal-section">
+      <p class="legal-text">
+        The Contest is open to individuals who, prior to the start of the Contest Period and at the time of entry are 19 years of age or older. 
+        Individuals must be in good standing of Momentum in order to redeem the Prize. If an individual is not a Momentum cardholder, they must 
+        sign up in order to redeem their Prize. Registration for Momentum is free.
+      </p>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+      <div class="footer-content">
+        <div class="footer-links">
+          <a href="https://fallsviewcasinoresort.com/policies/privacy-policy.html" target="_blank">Privacy Policy</a>
+          <span class="separator">|</span>
+          <a href="https://fallsviewcasinoresort.com/policies/momentum-terms-and-conditions.html" target="_blank">Terms of Use</a>
+          <span class="separator">|</span>
+          <a href="#" target="_blank" id="officialRulesLink">Official Rules</a>
+        </div>
+        <div class="footer-logo">
+          <a href="https://www.playsmart.ca/" target="_blank">
+            <img src="/img/playsmart.png" alt="Play Smart" class="playsmart-logo">
+          </a>
+        </div>
+        <p class="copyright">&copy; 2026 Fallsview Casino Resort. All rights reserved.</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="contestModal">
+    <div class="modal-wrapper">
+      <div class="modal-content">
+        <button class="modal-close" id="closeModalBtn" aria-label="Close modal">
+          <span>&times;</span>
+        </button>
+        <div class="modal-header">
+          <h2 class="modal-title">Enter the Contest</h2>
+          <p class="modal-subtitle">Fill out the form below to enter for your chance to win</p>
+        </div>
+        <div class="modal-body">
+          <!-- Form will be embedded here via iframe or custom form -->
+          <!-- Replace with actual form URL when available -->
+          <iframe 
+            id="contestForm" 
+            title="Price is Right Live Contest Entry Form" 
+            src="about:blank"
+          ></iframe>
+          
+          <!-- Placeholder form structure for reference -->
+          <div class="form-placeholder" style="display: none;">
+            <form id="entryForm" class="contest-form">
+              <div class="form-group">
+                <label for="firstName">First Name *</label>
+                <input type="text" id="firstName" name="firstName" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="lastName">Last Name *</label>
+                <input type="text" id="lastName" name="lastName" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="email">Email Address *</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+              
+              <div class="form-group">
+                <label for="dateOfBirth">Date of Birth *</label>
+                <input type="date" id="dateOfBirth" name="dateOfBirth" required>
+              </div>
+              
+              <div class="form-group checkbox-group">
+                <label>
+                  <input type="checkbox" name="ageVerification" required>
+                  <span>I am 19 years of age or older and I am not self-excluded *</span>
+                </label>
+              </div>
+              
+              <div class="form-group checkbox-group">
+                <label>
+                  <input type="checkbox" name="emailOptIn">
+                  <span>I would like to receive email communications from Niagara Casinos</span>
+                </label>
+              </div>
+              
+              <div class="form-group checkbox-group">
+                <label>
+                  <input type="checkbox" name="termsAcceptance" required>
+                  <span>I accept the <a href="#" target="_blank">Privacy Policy</a>, <a href="#" target="_blank">Notice of Collection</a>, and <a href="#" target="_blank">Official Rules</a> *</span>
+                </label>
+              </div>
+              
+              <button type="submit" class="submit-btn">Submit Entry</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
