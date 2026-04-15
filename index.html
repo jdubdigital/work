@@ -8,11 +8,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&amp;family=Inter:wght@300;400;500;600;700&amp;family=Bai+Jamjuree:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <style>
+        :root {
+            --site-max-width: 124rem;
+            --site-gutter: 1rem;
+        }
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
         .blueprint-grid {
-            background-image: 
+            background-image:
                 linear-gradient(to right, rgba(224, 55, 35, 0.05) 1px, transparent 1px),
                 linear-gradient(to bottom, rgba(224, 55, 35, 0.05) 1px, transparent 1px);
             background-size: 40px 40px;
@@ -20,6 +24,51 @@
         .hero-shell {
             min-height: 100vh;
             min-height: 100svh;
+        }
+        .hero-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.5;
+            filter: saturate(0.75) brightness(0.65) contrast(1.05);
+        }
+        .hero-overlay {
+            background:
+                linear-gradient(to bottom, rgba(6, 6, 6, 0.4), rgba(6, 6, 6, 0.2) 28%, rgba(6, 6, 6, 0.76)),
+                radial-gradient(circle at center, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0.36) 72%, rgba(0, 0, 0, 0.58));
+        }
+        .site-frame {
+            width: min(100%, var(--site-max-width));
+            margin: 0 auto;
+            padding-left: var(--site-gutter);
+            padding-right: var(--site-gutter);
+            box-sizing: border-box;
+        }
+        .section-rail-left {
+            width: 100%;
+            padding-left: max(var(--site-gutter), calc((100vw - var(--site-max-width)) / 2 + var(--site-gutter)));
+            padding-right: clamp(1.5rem, 4vw, 5rem);
+            box-sizing: border-box;
+        }
+        .hero-wordmark {
+            display: block;
+            font-family: "Space Grotesk", sans-serif;
+            font-size: clamp(5rem, 13.6vw, 16rem);
+            font-weight: 300;
+            line-height: 0.9;
+            letter-spacing: 0.015em;
+            color: rgba(255, 255, 255, 0.84);
+            white-space: nowrap;
+            margin-left: -0.072em;
+            width: calc(100% + 0.144em);
+        }
+        .hero-corner {
+            position: absolute;
+            width: clamp(2.75rem, 4vw, 4.5rem);
+            height: clamp(2.75rem, 4vw, 4.5rem);
+            border-color: rgba(224, 55, 35, 0.72);
+            filter: drop-shadow(0 0 14px rgba(224, 55, 35, 0.18));
+            pointer-events: none;
         }
         .site-header {
             background: transparent;
@@ -36,7 +85,7 @@
             box-shadow: 0 10px 32px rgba(0, 0, 0, 0.18);
         }
         .grain-overlay {
-            background: rgba(0, 0, 0, 0.01);
+            background: rgba(0, 0, 0, 0.03);
             pointer-events: none;
             overflow: hidden;
         }
@@ -52,16 +101,16 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 160 160' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseA'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.35' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseA)' opacity='0.95'/%3E%3C/svg%3E");
             background-size: 150px 150px;
             mix-blend-mode: multiply;
-            opacity: 0.11;
-            filter: blur(0.55px) contrast(145%) brightness(0.55);
+            opacity: 0.17;
+            filter: blur(0.35px) contrast(165%) brightness(0.48);
             animation: static-shift 0.18s steps(3) infinite;
         }
         .grain-overlay::after {
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 96 96' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseB'%3E%3CfeTurbulence type='turbulence' baseFrequency='2.8' numOctaves='1' seed='11' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseB)' opacity='0.8'/%3E%3C/svg%3E");
             background-size: 96px 96px;
             mix-blend-mode: soft-light;
-            opacity: 0.05;
-            filter: brightness(0.6);
+            opacity: 0.09;
+            filter: brightness(0.72) contrast(135%);
             animation: static-shift-alt 0.12s steps(2) infinite;
         }
         @keyframes static-shift {
@@ -99,6 +148,37 @@
             .grain-overlay::before,
             .grain-overlay::after {
                 animation: none;
+            }
+        }
+        @media (min-width: 640px) {
+            :root {
+                --site-gutter: 1.5rem;
+            }
+        }
+        @media (min-width: 1024px) {
+            :root {
+                --site-gutter: 2.5rem;
+            }
+        }
+        @media (min-width: 1280px) {
+            :root {
+                --site-gutter: 3.5rem;
+            }
+        }
+        @media (min-width: 1536px) {
+            :root {
+                --site-gutter: 4rem;
+            }
+        }
+        @media (max-width: 767px) {
+            .hero-wordmark {
+                font-size: clamp(3.25rem, 18vw, 5.2rem);
+                line-height: 0.82;
+                letter-spacing: -0.03em;
+                white-space: normal;
+                width: auto;
+                max-width: 100%;
+                margin-left: -0.035em;
             }
         }
     </style>
@@ -176,7 +256,8 @@
 <body class="bg-surface text-on-surface font-body selection:bg-primary-container selection:text-on-primary-container">
 <div class="fixed inset-0 grain-overlay z-[100]"></div>
 <!-- TopNavBar -->
-<header class="site-header fixed top-0 left-0 right-0 z-50 flex justify-between items-center gap-4 w-full px-4 py-3 sm:px-6 sm:py-4 max-w-[100vw]">
+<header class="site-header fixed top-0 left-0 right-0 z-50">
+<div class="site-frame flex justify-between items-center gap-4 py-3 sm:py-4">
 <div class="flex items-center gap-4 sm:gap-8 min-w-0">
 <span class="text-lg sm:text-2xl font-black tracking-tighter text-[#e5e2e1] font-headline">FLEET CANADA</span>
 <nav class="hidden md:flex gap-6">
@@ -189,20 +270,31 @@
 <button class="shrink-0 bg-primary-container text-on-primary-container px-3 py-2 sm:px-6 text-[10px] sm:text-xs font-mono font-bold tracking-[0.22em] uppercase hover:bg-opacity-90 transition-all active:scale-95">
             GET IN TOUCH
         </button>
+</div>
 </header>
 <main class="relative">
 <!-- Hero Section -->
 <section class="relative hero-shell w-full overflow-hidden blueprint-grid border-b border-outline-variant/20">
-<div class="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent z-10"></div>
-<img class="absolute inset-0 w-full h-full object-cover opacity-60 mix-blend-luminosity" data-alt="Aerospace technician working on aircraft components in a high-tech facility" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDV0byWiHAEjvDK9jsndseUVp_NoIXyQUlhUZXS0KyR6o1yiZUlzMvw2erDLW9gUrSxQdAo_957iHfGfUUDqhadVWB_iCrzWfljafxc_WLYwfCHn1UAdTIjtATiR2JoMWbBtl_eZFqrmNkK9nw36-nk96QdqyjmlDEtgUg-ORNeTgAWxIoFSX7dTq1vptyiileU3Qn0TxC_OV8nyqiC7LU5HPrlS4efyCkO9jiO4DxH5Gs5A5vTmXfxtp3ezJLqVYrcVGDc1t7IUvw"/>
-<div class="relative z-20 hero-shell w-full flex flex-col items-start justify-end px-4 pt-24 pb-8 text-left sm:px-6 sm:pt-28 sm:pb-10 lg:px-10 lg:pt-32 lg:pb-16 xl:px-12 xl:pb-24">
+<video aria-hidden="true" autoplay="" class="absolute inset-0 hero-video" loop="" muted="" playsinline="" poster="https://lh3.googleusercontent.com/aida-public/AB6AXuDV0byWiHAEjvDK9jsndseUVp_NoIXyQUlhUZXS0KyR6o1yiZUlzMvw2erDLW9gUrSxQdAo_957iHfGfUUDqhadVWB_iCrzWfljafxc_WLYwfCHn1UAdTIjtATiR2JoMWbBtl_eZFqrmNkK9nw36-nk96QdqyjmlDEtgUg-ORNeTgAWxIoFSX7dTq1vptyiileU3Qn0TxC_OV8nyqiC7LU5HPrlS4efyCkO9jiO4DxH5Gs5A5vTmXfxtp3ezJLqVYrcVGDc1t7IUvw">
+<source src="dhc-515_b-roll (1080p).mp4" type="video/mp4"/>
+</video>
+<div class="absolute inset-0 hero-overlay z-10"></div>
+<div aria-hidden="true" class="absolute inset-x-0 top-20 z-20 sm:top-24 lg:top-28">
+<div class="site-frame">
+<div class="hero-wordmark">FLEET<span class="hidden sm:inline">&nbsp;</span><br class="sm:hidden"/>CANADA</div>
+</div>
+</div>
+<div class="relative z-20 hero-shell w-full">
+<div class="site-frame hero-shell flex flex-col items-start justify-end pt-24 pb-8 text-left sm:pt-28 sm:pb-10 lg:pt-32 lg:pb-10 xl:pb-16">
+<div class="relative w-full max-w-5xl">
 <div class="mb-4 sm:mb-5">
 <span class="bg-primary-container text-on-primary-container px-3 py-1 text-[10px] font-mono tracking-[0.3em] font-bold">CAPABLE_FOCUSED_COMMITTED</span>
 </div>
-<h1 class="w-full text-[clamp(2.2rem,11vw,9rem)] font-black font-headline leading-[0.86] sm:leading-[0.82] tracking-[-0.06em] text-[#e5e2e1] mb-6 sm:mb-8">
+<h1 class="w-full text-[clamp(1.9rem,7vw,5.5rem)]  font-headline leading-[0.92] sm:leading-[0.88] tracking-[-0.05em] text-[#e5e2e1] mb-6 sm:mb-8">
                     BUILD-TO-PRINT<br/><span class="text-primary-container">AEROSTRUCTURES</span>
 </h1>
-<div class="grid w-full max-w-6xl grid-cols-1 gap-6 border-t border-outline-variant/30 pt-6 sm:grid-cols-2 sm:gap-8 sm:pt-8 lg:grid-cols-3 lg:gap-12">
+</div>
+<div class="grid w-full grid-cols-1 gap-6 border-t border-outline-variant/30 pt-6 sm:grid-cols-2 sm:gap-8 sm:pt-8 lg:grid-cols-3 lg:gap-12">
 <div class="flex flex-col">
 <span class="text-[10px] font-mono text-primary uppercase tracking-widest mb-1">// COORD_LNK</span>
 <span class="text-xs sm:text-sm font-mono uppercase">42.9231&deg; N, 78.9329&deg; W</span>
@@ -217,15 +309,14 @@
 </div>
 </div>
 </div>
-<!-- Absolute Crosshairs -->
-<div class="hidden sm:block absolute top-1/4 left-6 lg:left-12 w-8 h-8 border-l border-t border-primary/40"></div>
-<div class="hidden sm:block absolute top-1/4 right-6 lg:right-12 w-8 h-8 border-r border-t border-primary/40"></div>
-<div class="hidden sm:block absolute bottom-1/4 left-6 lg:left-12 w-8 h-8 border-l border-b border-primary/40"></div>
-<div class="hidden sm:block absolute bottom-1/4 right-6 lg:right-12 w-8 h-8 border-r border-b border-primary/40"></div>
+</div>
+<!-- Hero Corner Brackets -->
+<div class="hero-corner bottom-4 left-4 sm:bottom-6 sm:left-6 lg:bottom-8 lg:left-8 border-l-2 border-b-2"></div>
+<div class="hero-corner bottom-4 right-4 sm:bottom-6 sm:right-6 lg:bottom-8 lg:right-8 border-r-2 border-b-2"></div>
 </section>
 <!-- Partner Logos Section -->
 <section class="py-10 sm:py-12 bg-surface-container border-b border-outline-variant/20">
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 overflow-hidden">
+<div class="site-frame overflow-hidden">
 <div class="flex items-center justify-start md:justify-between opacity-50 grayscale hover:grayscale-0 transition-all gap-6 sm:gap-8 flex-wrap md:flex-nowrap">
 <span class="text-lg sm:text-xl font-bold font-headline tracking-tighter text-on-surface">Gulfstream</span>
 <span class="text-lg sm:text-xl font-bold font-headline tracking-tighter text-on-surface">DE HAVILLAND</span>
@@ -236,8 +327,9 @@
 </div>
 </section>
 <!-- Industry Expertise Section -->
-<section class="grid grid-cols-1 lg:grid-cols-2 gap-0 border-b border-outline-variant/20">
-<div class="bg-primary-container p-6 sm:p-10 lg:p-16 flex flex-col justify-center items-start relative overflow-hidden group">
+<section class="border-b border-outline-variant/20">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-0">
+<div class="section-rail-left bg-primary-container py-6 sm:py-10 lg:py-16 flex flex-col justify-center items-start relative overflow-hidden group">
 <div class="absolute top-0 right-0 p-5 sm:p-8 text-[56px] sm:text-[80px] font-black text-on-primary/10 select-none">85+</div>
 <div class="relative z-10">
 <h2 class="text-3xl sm:text-4xl lg:text-6xl font-black font-headline text-on-primary-container leading-tight mb-6 sm:mb-8 uppercase">
@@ -270,10 +362,11 @@
 <div class="absolute inset-0 border border-white/5 pointer-events-none"></div>
 </div>
 </div>
+</div>
 </section>
 <!-- Passion That Drives Quality Section -->
-<section class="py-16 sm:py-24 px-4 sm:px-6 lg:px-12 bg-surface">
-<div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center gap-10 lg:gap-16">
+<section class="py-16 sm:py-24 bg-surface">
+<div class="site-frame flex flex-col md:flex-row items-start md:items-center gap-10 lg:gap-16">
 <div class="flex-1">
 <span class="text-[10px] font-mono text-primary tracking-[0.3em] font-bold uppercase mb-4 block">// MISSION_STATEMENT</span>
 <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black font-headline uppercase mb-6 sm:mb-8 leading-tight">Passion That Drives Quality.</h2>
@@ -297,7 +390,7 @@
 <!-- Trusted By The Industry Section -->
 <section class="py-16 sm:py-24 bg-primary-container text-on-primary-container relative overflow-hidden">
 <div class="blueprint-grid absolute inset-0 opacity-10"></div>
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 text-center relative z-10">
+<div class="site-frame text-center relative z-10">
 <h2 class="text-3xl sm:text-4xl lg:text-6xl font-black font-headline uppercase mb-5 sm:mb-6">Trusted By The Industry.</h2>
 <p class="text-base sm:text-lg lg:text-xl mb-8 sm:mb-12 max-w-2xl mx-auto opacity-90">
                     A broad base of approvals to meet the needs of OEMs worldwide.
@@ -309,7 +402,8 @@
 </section>
 <!-- Testimonial Section -->
 <section class="py-16 sm:py-24 bg-surface-container-low border-b border-outline-variant/20">
-<div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-12 text-center">
+<div class="site-frame">
+<div class="max-w-4xl mx-auto text-center">
 <span class="material-symbols-outlined text-primary-container text-4xl sm:text-5xl mb-6 sm:mb-8">format_quote</span>
 <blockquote class="text-xl sm:text-2xl md:text-3xl font-medium font-body leading-relaxed mb-10 sm:mb-12 text-on-surface/90 italic">
                     "The Fleet Canada team went above and beyond to support processing of an Upper Longeron in which on-time completion as crucial to our schedule [...]. As always, we thank you for being a key strategic Supplier to Erickson's S64 needs. We look forward to continuing our relationship for years to come."
@@ -319,16 +413,20 @@
 <div class="w-12 h-0.5 bg-primary-container mt-4"></div>
 </div>
 </div>
+</div>
 </section>
 <!-- Pre-Footer Massive Branding -->
 <section class="py-12 sm:py-20 border-t border-outline-variant/30 overflow-hidden bg-surface">
-<h2 class="text-[22vw] sm:text-[18vw] font-black font-headline leading-none text-on-surface/5 whitespace-nowrap tracking-tighter -ml-2 sm:-ml-8 select-none">
+<div class="site-frame overflow-hidden">
+<h2 class="text-[22vw] sm:text-[18vw] font-black font-headline leading-none text-on-surface/5 whitespace-nowrap tracking-tighter select-none">
                 FLEET CANADA
             </h2>
+</div>
 </section>
 </main>
 <!-- Footer -->
-<footer class="bg-[#131313] border-t-2 border-[#E03723] w-full px-4 sm:px-6 lg:px-12 py-12 sm:py-20 grid grid-cols-1 md:grid-cols-4 gap-10 sm:gap-12">
+<footer class="bg-[#131313] border-t-2 border-[#E03723] w-full py-12 sm:py-20">
+<div class="site-frame grid grid-cols-1 md:grid-cols-4 gap-10 sm:gap-12">
 <div class="col-span-1 md:col-span-2">
 <span class="text-2xl sm:text-3xl font-black text-[#e5e2e1] font-headline mb-6 sm:mb-8 block">FLEET CANADA</span>
 <p class="text-[10px] font-mono tracking-widest text-on-surface/40 max-w-sm">
@@ -355,6 +453,7 @@
 <span class="text-[10px] font-mono tracking-widest text-on-surface/40">
                 &copy; 2026 FLEET CANADA // MANUFACTURE SPEC: 9021-X // STATUS: OPTIMAL
             </span>
+</div>
 </div>
 </footer>
 <script>
